@@ -1,4 +1,4 @@
-require './publisher'
+require_relative './publisher'
 require 'spec'
 
 describe EventPublisher, ": unsubscribing" do
@@ -12,7 +12,7 @@ describe EventPublisher, ": unsubscribing" do
 		@publisher.subscribe :first_event, method(:first_event_handler)
 		@publisher.unsubscribe :first_event, method(:first_event_handler)
 		subscribed = @publisher.subscribed? :first_event, method(:first_event_handler)
-		subscribed.should == false
+		subscribed.should be_false
 	end
 	
 end

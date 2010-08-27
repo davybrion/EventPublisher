@@ -1,4 +1,4 @@
-require './publisher'
+require_relative './publisher'
 require 'spec'
 
 describe EventPublisher, ": triggering event" do
@@ -12,7 +12,7 @@ describe EventPublisher, ": triggering event" do
 
 	it "should pass single event arg correctly to subscribed method with one argument" do
 		@args = nil
-	  def first_event_handler(args);
+		def first_event_handler(args);
 			@args = args
 		end
 
@@ -29,23 +29,23 @@ describe EventPublisher, ": triggering event" do
 		
 		@publisher.subscribe :second_event, method(:second_event_handler)
 		@publisher.trigger_second_event "second", "event"
-		@args2_1.should == "second"
-		@args2_2.should == "event"
+		@args2_1.should eql("second")
+		@args2_2.should eql("event")
 	end
 
 	it "should pass single event arg correctly to subscribed block with one argument" do
 		event_args = nil
 		@publisher.subscribe(:first_event) { |args| event_args = args }
 		@publisher.trigger_first_event "test"
-	  event_args.should == "test"
+	  event_args.should eql("test")
 	end
 	
 	it "should pass multiple event args correctly to subscribed block with two arguments" do
 	  first_arg, second_arg = nil, nil
 		@publisher.subscribe(:second_event) { |arg1,arg2| first_arg, second_arg = arg1, arg2 }
 		@publisher.trigger_second_event "first", "second"
-		first_arg.should == "first"
-		second_arg.should == "second"
+		first_arg.should eql("first")
+		second_arg.should eql("second")
 	end
 	
 	it "should call subscribed method once for each time it was subscribed" do
@@ -72,8 +72,8 @@ describe EventPublisher, ": triggering event" do
 		@publisher.subscribe :first_event, method(:handler1)
 		@publisher.subscribe :first_event, method(:handler2)
 		@publisher.trigger_first_event "first_event"
-		@counter1.should == 1
-		@counter2.should == 1
+		@counter1.should eql(1)
+		@counter2.should eql(1)
 	end
 	
 end

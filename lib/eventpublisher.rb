@@ -79,14 +79,12 @@ module EventPublisher
 			EVENTS << symbol
 
 			define_method getter do
-				event = instance_variable_get variable
-
-				if event == nil
+				if !instance_variable_defined? variable
 					event = Event.new(symbol.to_s)
 					instance_variable_set variable, event
 				end
-
-				event
+				
+				instance_variable_get variable
 			end
 			
 			private getter

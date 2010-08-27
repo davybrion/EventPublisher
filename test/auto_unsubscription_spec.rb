@@ -15,8 +15,8 @@ describe EventPublisher, ": auto unsubscribing" do
 	it "should unsubscribe all suitable methods" do
 		first_handler_subscribed = @publisher.subscribed? :first_event, method(:first_event_handler)
 		second_handler_subscribed = @publisher.subscribed? :second_event, method(:second_event_handler)
-		first_handler_subscribed.should == false
-		second_handler_subscribed.should == false
+		first_handler_subscribed.should be_false
+		second_handler_subscribed.should be_false
 	end
 	
 end
