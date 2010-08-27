@@ -12,6 +12,10 @@ module EventPublisher
 			@handlers << block if block
 		end
 
+		def has?(method)
+			@handlers.include? method
+		end
+
 		def remove(method)
 			@handlers.delete method if method
 		end
@@ -42,6 +46,11 @@ module EventPublisher
 	def unsubscribe(symbol, method)
 		event = send(symbol)
 		event.remove method
+	end
+
+	def subscribed?(symbol, method)
+		event = send(symbol)
+		event.has? method
 	end
 
 	private
