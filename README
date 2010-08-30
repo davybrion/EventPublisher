@@ -1,5 +1,9 @@
 The EventPublisher module enables you to define multiple events in a class, and have objects subscribe to them with either a Method instance, or a block.  Subscribers can obviously also unsubscribe Method instances, though blocks can't be unsubscribed.
 
+To install, simply type this:
+
+gem install eventpublisher
+
 Here's a simple example that illustrates the usage of the EventPublisher module:
 
 class Publisher
